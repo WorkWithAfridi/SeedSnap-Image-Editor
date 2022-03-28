@@ -62,9 +62,25 @@ class _SplashScreenState extends State<SplashScreen> {
                     width: getWidth(context) / 2.5,
                     child: Lottie.asset('assets/lottieAnimation.json'),
                   ),
-                  Text(
-                    'SeedSnap',
-                    style: titleTS,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            'SeedSnap',
+                            style: titleTS,
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            'By KYOTO',
+                            style: creatorTextStyle,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),

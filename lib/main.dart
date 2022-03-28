@@ -13,8 +13,13 @@ class SeedSnap extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.light(),
+      theme: ThemeData.light().copyWith(
+        primaryColor: Colors.pink,
+        primaryColorLight: Colors.pink
+      ),
       home: SplashScreen(),
     );
   }
 }
+
+//play heat waves

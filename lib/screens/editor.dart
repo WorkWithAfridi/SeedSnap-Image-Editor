@@ -460,7 +460,7 @@ class _EditorState extends EditImageViewModel {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 15.0),
                             child: Text(
-                              'Filters',
+                              'Apply Filters',
                               style: defaultTS,
                             ),
                           ),
@@ -468,143 +468,270 @@ class _EditorState extends EditImageViewModel {
                             height: 10,
                           ),
                           SizedBox(
-                              height: 100,
-                              width: getWidth(context),
-                              child: ListView(
-                                physics: BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                scrollDirection: Axis.horizontal,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          filterColor =
-                                              Colors.pink.withOpacity(.3);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 150,
-                                        color: Colors.red.withOpacity(.3),
-                                      ),
+                            height: 100,
+                            width: getWidth(context),
+                            child: ListView(
+                              physics: BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        filterColor =
+                                            Colors.deepOrange.withOpacity(.3);
+                                      });
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.file(
+                                            File(widget.selectedImage),
+                                            fit: BoxFit.fill,
+                                            width: getWidth(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          color:
+                                              Colors.deepOrange.withOpacity(.3),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          filterColor =
-                                              Colors.pink.withOpacity(.3);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 150,
-                                        color: Colors.pink.withOpacity(.3),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        filterColor =
+                                            Colors.pink.withOpacity(.3);
+                                      });
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.file(
+                                            File(widget.selectedImage),
+                                            fit: BoxFit.fill,
+                                            width: getWidth(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          color: Colors.pink.withOpacity(.3),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          filterColor =
-                                              Colors.blueAccent.withOpacity(.3);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 150,
-                                        color: Colors.blueAccent.withOpacity(.3),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        filterColor =
+                                            Colors.blueAccent.withOpacity(.3);
+                                      });
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.file(
+                                            File(widget.selectedImage),
+                                            fit: BoxFit.fill,
+                                            width: getWidth(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          color:
+                                              Colors.blueAccent.withOpacity(.3),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          filterColor =
-                                              Colors.green.withOpacity(.3);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 150,
-                                        color: Colors.green.withOpacity(.3),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        filterColor =
+                                            Colors.green.withOpacity(.3);
+                                      });
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.file(
+                                            File(widget.selectedImage),
+                                            fit: BoxFit.fill,
+                                            width: getWidth(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          color: Colors.green.withOpacity(.3),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          filterColor =
-                                              Colors.yellow.withOpacity(.3);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 150,
-                                        color: Colors.yellow.withOpacity(.3),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        filterColor =
+                                            Colors.yellow.withOpacity(.3);
+                                      });
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.file(
+                                            File(widget.selectedImage),
+                                            fit: BoxFit.fill,
+                                            width: getWidth(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          color: Colors.yellow.withOpacity(.3),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          filterColor =
-                                              Colors.black.withOpacity(.3);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 150,
-                                        color: Colors.black.withOpacity(.3),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        filterColor =
+                                            Colors.black.withOpacity(.3);
+                                      });
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.file(
+                                            File(widget.selectedImage),
+                                            fit: BoxFit.fill,
+                                            width: getWidth(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          color: Colors.black.withOpacity(.3),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          filterColor =
-                                              Colors.cyan.withOpacity(.3);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 150,
-                                        color: Colors.cyan.withOpacity(.3),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        filterColor =
+                                            Colors.cyan.withOpacity(.3);
+                                      });
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.file(
+                                            File(widget.selectedImage),
+                                            fit: BoxFit.fill,
+                                            width: getWidth(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          color: Colors.cyan.withOpacity(.3),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 15.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          filterColor =
-                                              Colors.deepPurple.withOpacity(.3);
-                                        });
-                                      },
-                                      child: Container(
-                                        height: 100,
-                                        width: 150,
-                                        color: Colors.deepPurple.withOpacity(.3),
-                                      ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15.0),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        filterColor =
+                                            Colors.deepPurple.withOpacity(.3);
+                                      });
+                                    },
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          child: Image.file(
+                                            File(widget.selectedImage),
+                                            fit: BoxFit.fill,
+                                            width: getWidth(context),
+                                          ),
+                                        ),
+                                        Container(
+                                          height: 100,
+                                          width: 100,
+                                          color:
+                                              Colors.deepPurple.withOpacity(.3),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                ],
-                              ))
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Work in progress.',
+                                  style: defaultTS.copyWith(color: Colors.white30),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
                         ],
                       ),
                     ),

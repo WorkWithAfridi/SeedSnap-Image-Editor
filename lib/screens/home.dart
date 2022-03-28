@@ -51,8 +51,8 @@ class Home extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        TextButton(
-                          onPressed: () async {
+                        GestureDetector(
+                          onTap: () async {
                             XFile? xfile = await ImagePicker()
                                 .pickImage(source: ImageSource.gallery);
                             if (xfile != null) {
@@ -74,13 +74,36 @@ class Home extends StatelessWidget {
                             }
                           },
                           child: Text(
-                            "Edit photo",
+                            "Start editing",
                             style: titleTS,
                           ),
                         )
                       ],
                     ),
                   ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: [
+                          Text(
+                            'SeedSnap',
+                            style: titleTS,
+                          ),
+                          SizedBox(
+                            height: 3,
+                          ),
+                          Text(
+                            'By KYOTO',
+                            style: creatorTextStyle,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  )
                 ],
               ),
             ),

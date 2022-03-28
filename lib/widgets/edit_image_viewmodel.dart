@@ -61,14 +61,15 @@ abstract class EditImageViewModel extends State<Editor> {
             ),
           ),
           actions: [
-            TextButton(
-              onPressed: () {
+            GestureDetector(
+              onTap: () {
                 Navigator.of(context).pop();
               },
               child: Text("Back", style: defaultTS),
             ),
-            TextButton(
-              onPressed: () {
+            SizedBox(width: 10,),
+            GestureDetector(
+              onTap: () {
                 addNewText(context);
                 addCaptionController.text = '';
               },
@@ -76,6 +77,13 @@ abstract class EditImageViewModel extends State<Editor> {
                 "Add Text",
                 style: defaultTS,
               ),
+            ),
+            Column(
+              children: [
+                SizedBox(width: 10,),
+
+                SizedBox(height: 45,),
+              ],
             ),
           ],
         );

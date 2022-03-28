@@ -16,3 +16,12 @@ TextStyle titleTS = GoogleFonts.getFont(
     color: primary
   ),
 );
+
+final TextStyle creatorTextStyle = GoogleFonts.getFont(
+  'Indie Flower',
+  textStyle: const TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 15,
+      height: .5,
+      color: Colors.pink),
+);
