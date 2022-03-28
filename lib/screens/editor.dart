@@ -42,6 +42,8 @@ class _EditorState extends EditImageViewModel {
     });
   }
 
+  Color filterColor = Colors.transparent;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,10 +81,19 @@ class _EditorState extends EditImageViewModel {
                   ),
                   Expanded(
                     child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Text(
+                              'Text Style',
+                              style: defaultTS,
+                            ),
+                          ),
                           Container(
                             // color: Color(0xff18191A),
                             height: 60,
@@ -105,7 +116,8 @@ class _EditorState extends EditImageViewModel {
                                         final name = "screenshot_$time";
                                         await requestPermission(
                                             Permission.storage);
-                                        await ImageGallerySaver.saveImage(image!,
+                                        await ImageGallerySaver.saveImage(
+                                            image!,
                                             name: name);
 
                                         ScaffoldMessenger.of(context)
@@ -234,7 +246,9 @@ class _EditorState extends EditImageViewModel {
                                 ),
                                 IconButton(
                                   onPressed: () {
-                                    if (texts[currentIndex].text.contains('\n')) {
+                                    if (texts[currentIndex]
+                                        .text
+                                        .contains('\n')) {
                                       setState(() {
                                         texts[currentIndex].text =
                                             texts[currentIndex]
@@ -357,13 +371,33 @@ class _EditorState extends EditImageViewModel {
                               ],
                             ),
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Text(
+                              'Image',
+                              style: defaultTS,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Screenshot(
                             controller: screenshotController,
                             child: SizedBox(
-                              // height: getHeight(context) * .3,
+                              height: getWidth(context),
+                              width: getWidth(context),
                               child: Stack(
                                 children: [
                                   selectedImage,
+                                  Container(
+                                    height: getWidth(context),
+                                    width: getWidth(context),
+                                    color: filterColor,
+                                  ),
                                   for (int i = 0; i < texts.length; i++)
                                     Positioned(
                                       left: texts[i].left,
@@ -381,17 +415,20 @@ class _EditorState extends EditImageViewModel {
                                             ),
                                           );
                                         },
-                                        onTap: () => setCurrentIndex(context, i),
+                                        onTap: () =>
+                                            setCurrentIndex(context, i),
                                         child: Draggable(
-                                          feedback: ImageText(textInfo: texts[i]),
+                                          feedback:
+                                              ImageText(textInfo: texts[i]),
                                           child: ImageText(textInfo: texts[i]),
                                           onDragEnd: (drag) {
-                                            final renderBox = context
-                                                .findRenderObject() as RenderBox;
+                                            final renderBox =
+                                                context.findRenderObject()
+                                                    as RenderBox;
                                             Offset offset = renderBox
                                                 .globalToLocal(drag.offset);
                                             setState(() {
-                                              texts[i].top = offset.dy - 135;
+                                              texts[i].top = offset.dy - 200;
                                               texts[i].left = offset.dx;
                                             });
                                           },
@@ -407,8 +444,8 @@ class _EditorState extends EditImageViewModel {
                                             style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.bold,
-                                                color:
-                                                    Colors.black.withOpacity(.3)),
+                                                color: Colors.black
+                                                    .withOpacity(.3)),
                                           ),
                                         )
                                       : SizedBox.shrink()
@@ -416,6 +453,158 @@ class _EditorState extends EditImageViewModel {
                               ),
                             ),
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 15.0),
+                            child: Text(
+                              'Filters',
+                              style: defaultTS,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          SizedBox(
+                              height: 100,
+                              width: getWidth(context),
+                              child: ListView(
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          filterColor =
+                                              Colors.pink.withOpacity(.3);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 150,
+                                        color: Colors.red.withOpacity(.3),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          filterColor =
+                                              Colors.pink.withOpacity(.3);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 150,
+                                        color: Colors.pink.withOpacity(.3),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          filterColor =
+                                              Colors.blueAccent.withOpacity(.3);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 150,
+                                        color: Colors.blueAccent.withOpacity(.3),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          filterColor =
+                                              Colors.green.withOpacity(.3);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 150,
+                                        color: Colors.green.withOpacity(.3),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          filterColor =
+                                              Colors.yellow.withOpacity(.3);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 150,
+                                        color: Colors.yellow.withOpacity(.3),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          filterColor =
+                                              Colors.black.withOpacity(.3);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 150,
+                                        color: Colors.black.withOpacity(.3),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          filterColor =
+                                              Colors.cyan.withOpacity(.3);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 150,
+                                        color: Colors.cyan.withOpacity(.3),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15.0),
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          filterColor =
+                                              Colors.deepPurple.withOpacity(.3);
+                                        });
+                                      },
+                                      child: Container(
+                                        height: 100,
+                                        width: 150,
+                                        color: Colors.deepPurple.withOpacity(.3),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ))
                         ],
                       ),
                     ),

@@ -40,6 +40,7 @@ dependencies:
   permission_handler: any
   lottie: any
   google_fonts: any
+  image_cropper: any
 
 dev_dependencies:
   flutter_test:

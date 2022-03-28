@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:lottie/lottie.dart';
 import 'package:seedsnap_image_editor/constants/colors.dart';
 import 'package:seedsnap_image_editor/constants/dimentions.dart';
 import 'package:seedsnap_image_editor/constants/textStyle.dart';
@@ -54,6 +56,15 @@ class Home extends StatelessWidget {
                             XFile? xfile = await ImagePicker()
                                 .pickImage(source: ImageSource.gallery);
                             if (xfile != null) {
+                              File? croppedImage =
+                                  await ImageCropper().cropImage(
+                                sourcePath: xfile.path,
+                                aspectRatio:
+                                    CropAspectRatio(ratioX: 1, ratioY: 1),
+                                aspectRatioPresets: [
+                                  CropAspectRatioPreset.square
+                                ],
+                              );
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) =>
@@ -63,7 +74,7 @@ class Home extends StatelessWidget {
                             }
                           },
                           child: Text(
-                            "Add Image",
+                            "Edit photo",
                             style: titleTS,
                           ),
                         )
