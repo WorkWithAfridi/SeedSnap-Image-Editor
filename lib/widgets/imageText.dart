@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:seedsnap_image_editor/models/textInfo.dart';
 
+import '../constants/textStyle.dart';
+
 class ImageText extends StatelessWidget {
   final TextInfo textInfo;
   const ImageText({Key? key, required this.textInfo}) : super(key: key);
@@ -10,7 +12,7 @@ class ImageText extends StatelessWidget {
     return Text(
       textInfo.text,
       textAlign: textInfo.textAlign,
-      style: TextStyle(
+      style: defaultTS.copyWith(
         fontSize: textInfo.fontSize,
         fontWeight: textInfo.fontWeight,
         fontStyle: textInfo.fontStyle,

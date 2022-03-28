@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seedsnap_image_editor/screens/SplashScreen.dart';
 import 'package:seedsnap_image_editor/screens/home.dart';
 
 void main(){
@@ -13,11 +14,7 @@ class SeedSnap extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.light(),
-      home: Home(),
+      home: SplashScreen(),
     );
   }
 }
-
-
-// Done till 1:04:00
-// video link https://www.youtube.com/watch?v=vzg6iNziiKw

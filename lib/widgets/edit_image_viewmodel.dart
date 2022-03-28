@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:seedsnap_image_editor/constants/colors.dart';
 import 'package:seedsnap_image_editor/models/textInfo.dart';
 
+import '../constants/textStyle.dart';
 import '../screens/editor.dart';
 
 abstract class EditImageViewModel extends State<Editor> {
@@ -33,15 +35,29 @@ abstract class EditImageViewModel extends State<Editor> {
     showDialog(
       context: context,
       builder: (context) {
+        final inputBorder = OutlineInputBorder(
+          borderSide: Divider.createBorderSide(context),
+        );
         return AlertDialog(
-          title: Text('Add new text'),
+          backgroundColor: background,
+          titleTextStyle: defaultTS,
+          title: Text(
+            'Add new text',
+            style: defaultTS,
+          ),
           content: TextField(
             controller: addCaptionController,
-            maxLines: 5,
+            style: defaultTS,
+            maxLines: 4,
             decoration: InputDecoration(
-              suffixIcon: Icon(Icons.edit),
+              hintText: 'Enter your caption here',
+              hintStyle: defaultTS.copyWith(color: primary.withOpacity(.5)),
+              border: inputBorder,
+              focusedBorder: inputBorder,
+              enabledBorder: inputBorder,
+              fillColor: Colors.white10,
               filled: true,
-              hintText: 'Enter you caption here...',
+              contentPadding: const EdgeInsets.all(8),
             ),
           ),
           actions: [
@@ -49,11 +65,17 @@ abstract class EditImageViewModel extends State<Editor> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: Text("Back"),
+              child: Text("Back", style: defaultTS),
             ),
             TextButton(
-              onPressed: () => addNewText(context),
-              child: Text("Add Text"),
+              onPressed: () {
+                addNewText(context);
+                addCaptionController.text = '';
+              },
+              child: Text(
+                "Add Text",
+                style: defaultTS,
+              ),
             ),
           ],
         );
