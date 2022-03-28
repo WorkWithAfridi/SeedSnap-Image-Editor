@@ -78,344 +78,346 @@ class _EditorState extends EditImageViewModel {
                     backgroundColor: Colors.transparent,
                   ),
                   Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          // color: Color(0xff18191A),
-                          height: 60,
-                          width: getWidth(context),
-                          child: ListView(
-                            physics: BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  if (texts.isNotEmpty) {
-                                    screenshotController
-                                        .capture()
-                                        .then((Uint8List? image) async {
-                                      final time = DateTime.now()
-                                          .toIso8601String()
-                                          .replaceAll('.', '-')
-                                          .replaceAll(':', '-');
-                                      final name = "screenshot_$time";
-                                      await requestPermission(
-                                          Permission.storage);
-                                      await ImageGallerySaver.saveImage(image!,
-                                          name: name);
-
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text('Image saved.'),
-                                        ),
-                                      );
-                                      Navigator.pop(context);
-                                    }).catchError((err) {
-                                      print(err);
-                                    });
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.save,
-                                  color: primary,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    texts[currentIndex].fontSize =
-                                        texts[currentIndex].fontSize + 2;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.add,
-                                  color: primary,
-                                ),
-                                tooltip: 'Increase font size',
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    texts[currentIndex].fontSize =
-                                        texts[currentIndex].fontSize - 2;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.remove,
-                                  color: primary,
-                                ),
-                                tooltip: 'Decrease font size',
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    texts[currentIndex].textAlign =
-                                        TextAlign.left;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.format_align_left,
-                                  color: Colors.white,
-                                ),
-                                tooltip: 'Align Left',
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    texts[currentIndex].textAlign =
-                                        TextAlign.center;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.format_align_center,
-                                  color: primary,
-                                ),
-                                tooltip: 'Align Center',
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    texts[currentIndex].textAlign =
-                                        TextAlign.right;
-                                  });
-                                },
-                                icon: Icon(
-                                  Icons.format_align_right,
-                                  color: primary,
-                                ),
-                                tooltip: 'Align Right',
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  if (texts[currentIndex].fontWeight !=
-                                      FontWeight.bold) {
-                                    setState(() {
-                                      texts[currentIndex].fontWeight =
-                                          FontWeight.bold;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      texts[currentIndex].fontWeight =
-                                          FontWeight.normal;
-                                    });
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.format_bold,
-                                  color: primary,
-                                ),
-                                tooltip: 'Bold',
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  if (texts[currentIndex].fontStyle ==
-                                      FontStyle.italic) {
-                                    setState(() {
-                                      texts[currentIndex].fontStyle =
-                                          FontStyle.normal;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      texts[currentIndex].fontStyle =
-                                          FontStyle.italic;
-                                    });
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.format_italic,
-                                  color: primary,
-                                ),
-                                tooltip: 'Italic',
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  if (texts[currentIndex].text.contains('\n')) {
-                                    setState(() {
-                                      texts[currentIndex].text =
-                                          texts[currentIndex]
-                                              .text
-                                              .replaceAll('\n', ' ');
-                                    });
-                                  } else {
-                                    setState(() {
-                                      texts[currentIndex].text =
-                                          texts[currentIndex]
-                                              .text
-                                              .replaceAll(' ', '\n');
-                                    });
-                                  }
-                                },
-                                icon: Icon(
-                                  Icons.space_bar,
-                                  color: primary,
-                                ),
-                                tooltip: 'Add New Line',
-                              ),
-                              Tooltip(
-                                message: 'White',
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changeTextColor(Colors.white);
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Tooltip(
-                                message: 'Red',
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changeTextColor(Colors.red);
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.red,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Tooltip(
-                                message: 'Blue',
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changeTextColor(Colors.blue);
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.blue,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Tooltip(
-                                message: 'Pink',
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changeTextColor(Colors.pink);
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.pink,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Tooltip(
-                                message: 'Yellow',
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changeTextColor(Colors.yellow);
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.yellow,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Tooltip(
-                                message: 'Green',
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changeTextColor(Colors.green);
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.green,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Tooltip(
-                                message: 'Black',
-                                child: GestureDetector(
-                                  onTap: () {
-                                    changeTextColor(Colors.black);
-                                  },
-                                  child: CircleAvatar(
-                                    backgroundColor: Colors.black,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Screenshot(
-                          controller: screenshotController,
-                          child: SizedBox(
-                            height: getHeight(context) * .3,
-                            child: Stack(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            // color: Color(0xff18191A),
+                            height: 60,
+                            width: getWidth(context),
+                            child: ListView(
+                              physics: BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
                               children: [
-                                selectedImage,
-                                for (int i = 0; i < texts.length; i++)
-                                  Positioned(
-                                    left: texts[i].left,
-                                    top: texts[i].top,
-                                    right: texts[i].right,
-                                    child: GestureDetector(
-                                      onLongPress: () {
-                                        setState(() {
-                                          texts.removeAt(i);
-                                        });
+                                IconButton(
+                                  onPressed: () {
+                                    if (texts.isNotEmpty) {
+                                      screenshotController
+                                          .capture()
+                                          .then((Uint8List? image) async {
+                                        final time = DateTime.now()
+                                            .toIso8601String()
+                                            .replaceAll('.', '-')
+                                            .replaceAll(':', '-');
+                                        final name = "screenshot_$time";
+                                        await requestPermission(
+                                            Permission.storage);
+                                        await ImageGallerySaver.saveImage(image!,
+                                            name: name);
+
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
                                           SnackBar(
-                                            content: Text('Text removed!'),
+                                            content: Text('Image saved.'),
                                           ),
                                         );
-                                      },
-                                      onTap: () => setCurrentIndex(context, i),
-                                      child: Draggable(
-                                        feedback: ImageText(textInfo: texts[i]),
-                                        child: ImageText(textInfo: texts[i]),
-                                        onDragEnd: (drag) {
-                                          final renderBox = context
-                                              .findRenderObject() as RenderBox;
-                                          Offset offset = renderBox
-                                              .globalToLocal(drag.offset);
-                                          setState(() {
-                                            texts[i].top = offset.dy - 135;
-                                            texts[i].left = offset.dx;
-                                          });
-                                        },
-                                      ),
+                                        Navigator.pop(context);
+                                      }).catchError((err) {
+                                        print(err);
+                                      });
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.save,
+                                    color: primary,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      texts[currentIndex].fontSize =
+                                          texts[currentIndex].fontSize + 2;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.add,
+                                    color: primary,
+                                  ),
+                                  tooltip: 'Increase font size',
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      texts[currentIndex].fontSize =
+                                          texts[currentIndex].fontSize - 2;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.remove,
+                                    color: primary,
+                                  ),
+                                  tooltip: 'Decrease font size',
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      texts[currentIndex].textAlign =
+                                          TextAlign.left;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.format_align_left,
+                                    color: Colors.white,
+                                  ),
+                                  tooltip: 'Align Left',
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      texts[currentIndex].textAlign =
+                                          TextAlign.center;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.format_align_center,
+                                    color: primary,
+                                  ),
+                                  tooltip: 'Align Center',
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      texts[currentIndex].textAlign =
+                                          TextAlign.right;
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.format_align_right,
+                                    color: primary,
+                                  ),
+                                  tooltip: 'Align Right',
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    if (texts[currentIndex].fontWeight !=
+                                        FontWeight.bold) {
+                                      setState(() {
+                                        texts[currentIndex].fontWeight =
+                                            FontWeight.bold;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        texts[currentIndex].fontWeight =
+                                            FontWeight.normal;
+                                      });
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.format_bold,
+                                    color: primary,
+                                  ),
+                                  tooltip: 'Bold',
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    if (texts[currentIndex].fontStyle ==
+                                        FontStyle.italic) {
+                                      setState(() {
+                                        texts[currentIndex].fontStyle =
+                                            FontStyle.normal;
+                                      });
+                                    } else {
+                                      setState(() {
+                                        texts[currentIndex].fontStyle =
+                                            FontStyle.italic;
+                                      });
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.format_italic,
+                                    color: primary,
+                                  ),
+                                  tooltip: 'Italic',
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    if (texts[currentIndex].text.contains('\n')) {
+                                      setState(() {
+                                        texts[currentIndex].text =
+                                            texts[currentIndex]
+                                                .text
+                                                .replaceAll('\n', ' ');
+                                      });
+                                    } else {
+                                      setState(() {
+                                        texts[currentIndex].text =
+                                            texts[currentIndex]
+                                                .text
+                                                .replaceAll(' ', '\n');
+                                      });
+                                    }
+                                  },
+                                  icon: Icon(
+                                    Icons.space_bar,
+                                    color: primary,
+                                  ),
+                                  tooltip: 'Add New Line',
+                                ),
+                                Tooltip(
+                                  message: 'White',
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      changeTextColor(Colors.white);
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.white,
                                     ),
                                   ),
-                                createdText.text.isNotEmpty
-                                    ? Positioned(
-                                        left: 0,
-                                        bottom: 0,
-                                        child: Text(
-                                          createdText.text,
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.bold,
-                                              color:
-                                                  Colors.black.withOpacity(.3)),
-                                        ),
-                                      )
-                                    : SizedBox.shrink()
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Tooltip(
+                                  message: 'Red',
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      changeTextColor(Colors.red);
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Tooltip(
+                                  message: 'Blue',
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      changeTextColor(Colors.blue);
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Tooltip(
+                                  message: 'Pink',
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      changeTextColor(Colors.pink);
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.pink,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Tooltip(
+                                  message: 'Yellow',
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      changeTextColor(Colors.yellow);
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.yellow,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Tooltip(
+                                  message: 'Green',
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      changeTextColor(Colors.green);
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.green,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Tooltip(
+                                  message: 'Black',
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      changeTextColor(Colors.black);
+                                    },
+                                    child: CircleAvatar(
+                                      backgroundColor: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                          Screenshot(
+                            controller: screenshotController,
+                            child: SizedBox(
+                              // height: getHeight(context) * .3,
+                              child: Stack(
+                                children: [
+                                  selectedImage,
+                                  for (int i = 0; i < texts.length; i++)
+                                    Positioned(
+                                      left: texts[i].left,
+                                      top: texts[i].top,
+                                      right: texts[i].right,
+                                      child: GestureDetector(
+                                        onLongPress: () {
+                                          setState(() {
+                                            texts.removeAt(i);
+                                          });
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            SnackBar(
+                                              content: Text('Text removed!'),
+                                            ),
+                                          );
+                                        },
+                                        onTap: () => setCurrentIndex(context, i),
+                                        child: Draggable(
+                                          feedback: ImageText(textInfo: texts[i]),
+                                          child: ImageText(textInfo: texts[i]),
+                                          onDragEnd: (drag) {
+                                            final renderBox = context
+                                                .findRenderObject() as RenderBox;
+                                            Offset offset = renderBox
+                                                .globalToLocal(drag.offset);
+                                            setState(() {
+                                              texts[i].top = offset.dy - 135;
+                                              texts[i].left = offset.dx;
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  createdText.text.isNotEmpty
+                                      ? Positioned(
+                                          left: 0,
+                                          bottom: 0,
+                                          child: Text(
+                                            createdText.text,
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold,
+                                                color:
+                                                    Colors.black.withOpacity(.3)),
+                                          ),
+                                        )
+                                      : SizedBox.shrink()
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
